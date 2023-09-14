@@ -1,0 +1,64 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+//Table Student_Details {
+ // Name integer
+ // School_ID integer
+  // timestamp 
+//}
+
+Table Books {
+  //integer [primary key]
+  Book_ID int [primary key]//multiple copies of same book
+  Book_Title varchar
+  Book_Category varchar
+  //Copies_of_book int
+  //Book_Author varchar
+}
+
+//Table ISBN {
+//  ISBN_No integer
+//}
+
+Table Author {
+  Author_Name integer
+  No_of_books_written integer
+}
+
+Table Publisher {
+  Publisher_name integer
+  Publisher_code integer
+  No_of_books_publisher  integer
+
+}
+
+Table Category {
+  Category_Name integer
+  No_of_books_in_the_category int
+}
+Table Book_Issue_Details {
+  book_id integer [primary key]
+  Issued_to varchar
+  Issue_Date text
+  Issue_ID int
+}
+
+Table Student {
+  Student_name int
+  Student_ID int
+}
+
+//Ref: posts.user_id > users.id // many-to-one
+
+//Ref: users.id < space.following_user_id
+
+//Ref: users.id < space.followed_user_id
+//Ref: Author.Author_Name > ISBN.ISBN_No
+//Ref: Books.Book_ID < ISBN.ISBN_No
+//Ref: Author.Author_Name < ISBN.ISBN_No
+
+Ref: Books.Book_ID > Book_Issue_Details.book_id
+Ref: Student.Student_ID - Book_Issue_Details.Issue_ID
+Ref: Author.Author_Name < Books.Book_ID
+Ref: Books.Book_ID < Publisher.Publisher_code
+Ref: Category.Category_Name < Books.Book_ID
